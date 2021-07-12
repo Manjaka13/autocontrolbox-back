@@ -6,7 +6,8 @@ class Auth {
 	constructor(request) {
 		if (request) this._request = request;
 		else console.error("Request class is not given.");
-		if (!process.env.SALT) console.error("JWT token not given in .env variable.");
+		if (!process.env.JWT_SECRET)
+			console.error("JWT token not given in .env variable.");
 		this._jwtsecret = process.env.JWT_SECRET || "jwtsecret";
 		this._token_expiration = 60 * 60;
 	}
