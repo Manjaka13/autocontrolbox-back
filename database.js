@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 
+//All database functions
 class Database {
+	//Database connection
 	constructor() {
 		this.db = mysql.createConnection({
 			host: process.env.DATABASE_HOST,
@@ -10,37 +12,20 @@ class Database {
 		});
 	}
 
-	connect(callback) {
-		this.db.connect((err) => {
-			let status = false;
-			if (!err) status = true;
-			else console.error(err);
-			if (typeof callback === "function") callback(status);
-		});
-	}
-
-	request(request) {
-		if (typeof request === "string")
-			return new Promise((resolve, reject) => {
-				/* this.connect((status) => {
-					if (status) {
-						
-					} else reject("Unable to connect to database.");
-				}); */
-				this.db.query(request, (err, res, fields) => {
-					//this.disconnect();
-					if (err) reject(err);
-					else resolve(res);
+	//Issue a database request
+	request(req) {
+		if (typeof req === "string")
+			return new Promise((resolve) => {
+				this.db.query(req, (err, res) => {
+					if (err) console.error(err);
+					resolve(err ? null : res);
 				});
 			});
 		else
-			return new Promise((resolve, reject) => {
-				reject("Unable to issue an empty request.");
+			return new Promise((resolve) => {
+				console.error("Unable to issue an empty request.");
+				resolve(null);
 			});
-	}
-
-	disconnect(callback) {
-		this.db.destroy(callback);
 	}
 }
 

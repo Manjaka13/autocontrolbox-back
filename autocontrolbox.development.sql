@@ -11,4 +11,4 @@ CREATE TABLE IF NOT EXISTS users(
 
 
 INSERT INTO users(id, name, password) VALUES
-("9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", "admin", "$2y$12$WThj6nY35iuB4/He0KozNuZ/roBHzN23xVlUWPJWwUUKNEw0beCLi");
+("9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", "admin", "dc76e9f0c0006e8f919e0c515c66dbba3982f785");
